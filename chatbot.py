@@ -19,17 +19,10 @@ chatbot = ChatBot(
     database_uri='sqlite:///database.sqlite3'
 )
 
-# Training with Personal Ques & Ans
-training_data = open('training/ques_ans.txt').read().splitlines()
-
-
-trainer = ListTrainer(chatbot)
-trainer.train(training_data)
-
 # Training with Portugues Corpus Data
 trainer_corpus = ChatterBotCorpusTrainer(chatbot)
 trainer_corpus.train(
-    "chatterbot.corpus.portuguese",
     "chatterbot.corpus.portuguese.greetings",
     "chatterbot.corpus.portuguese.conversations",
+    "training/ques_ans.yml"
 )
