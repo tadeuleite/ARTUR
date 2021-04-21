@@ -1,10 +1,6 @@
 categories:
-- conversa
+- faculdade
 conversations:
-- - oi
-  - Olá! Em que posso ajudá-lo?
-- - qual o seu nome?
-  - Meu nome é A.R.T.U.R.Sou seu assistente :)
 - - quais cursos disponíveis?
   - A faculdade Senac possui os seguintes cursos de graduação <br /> Bacharelado em administração, Design de moda, Gastronomia, Gestão de RH, Estética e cosmética, Análise e desenvolv. de sistemas, Gestão comercial e Design de interiores.Saiba mais <a href="https://faculdadesenacpe.edu.br/curso/" target="_blank">aqui</a>
 - - trancamento de curso
