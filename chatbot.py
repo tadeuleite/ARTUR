@@ -24,5 +24,8 @@ trainer_corpus = ChatterBotCorpusTrainer(chatbot)
 trainer_corpus.train(
     "chatterbot.corpus.portuguese.greetings",
     "chatterbot.corpus.portuguese.conversations",
-    "training/ques_ans.yml"
+    "training/saudacao.yml",
+    "training/financeiro.yml",
+    "training/documentacao.yml",
+    "training/curso.yml"
 )
