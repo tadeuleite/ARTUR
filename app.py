@@ -1,6 +1,8 @@
+from static.objects.BotResponse import BotResponse
 from chatterbot.conversation import Statement, StatementMixin
 from chatbot import chatbot
 from flask import Flask, render_template, request, url_for
+import json
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -12,10 +14,11 @@ def home():
 @app.route("/get")
 def get_bot_response():
     userText = request.args.get('msg')
-    input_statement = Statement(userText)
-    response =  chatbot.get_response(input_statement)
-    # generatedResponse = chatbot.generate_response(input_statement)
-    return str(response)
+    response = chatbot.get_response(userText)
+    objectResponse = BotResponse(response.confidence, response.text, response.in_response_to, response.conversation, response.tags)
+    jsonResponse = json.dumps(objectResponse.__dict__, ensure_ascii=False).encode('utf8')
+    return jsonResponse 
+
 
 if __name__ == "__main__":
     app.run() 
