@@ -9,6 +9,9 @@ const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
 const BOT_NAME = "A.R.T.U.R.";
 const PERSON_NAME = "Você";
 
+document.querySelector(".openChatBtn").addEventListener("click", openForm);
+document.querySelector(".close").addEventListener("click", closeForm);
+
 msgerForm.addEventListener("submit", event => {
     event.preventDefault();
 
@@ -60,3 +63,4 @@ function formatDate(date) {
 
     return `${h.slice(-2)}:${m.slice(-2)}`;
 }
+

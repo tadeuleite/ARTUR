@@ -22,8 +22,6 @@ chatbot = ChatBot(
 # Training with Portugues Corpus Data
 trainer_corpus = ChatterBotCorpusTrainer(chatbot)
 trainer_corpus.train(
-    "chatterbot.corpus.portuguese.greetings",
-    "chatterbot.corpus.portuguese.conversations",
     "training/saudacao.yml",
     "training/financeiro.yml",
     "training/documentacao.yml",
