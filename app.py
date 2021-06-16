@@ -6,7 +6,7 @@ from chatbot import chatbot
 from flask import Flask, render_template, request
 import json
 import ftfy
-# from business.appBusiness import appBusiness
+from business.appBusiness import appBusiness
 import random
 
 app = Flask(__name__)
@@ -25,18 +25,15 @@ def home():
 def get_bot_response():
     userText = request.args.get('msg')
     response = chatbot.get_response(userText)
-    previousState = chatbot.get_latest_response(response.conversation)
-    respondeGenerate = chatbot.generate_response(response)
-    chatbot.learn_response(response,  previousState)
-    chatbot.storage.create(text=respondeGenerate.text,in_response_to=respondeGenerate.in_response_to,conversation=respondeGenerate.conversation,persona=respondeGenerate.persona)
     formatedResponse = ftfy.fix_text(response.text)
     objectResponse = BotResponse(response.confidence, formatedResponse, response.in_response_to, response.conversation, response.tags)
     if objectResponse.confidence < 0.8:
-        # iaResult = appBusiness.startIA()
-
-        # if iaResult.confidence < 0.8:
-        n = random.randint(0, (defaultResposes.__len__() - 1))
-        objectResponse.text = defaultResposes[n]
+        iaResult = appBusiness.test(userText)      
+        if iaResult.__len__() > 0:
+            objectResponse = BotResponse(100, iaResult[0].response, '', '', '')
+        else:     
+            n = random.randint(0, (defaultResposes.__len__() - 1))
+            objectResponse.text = defaultResposes[n]
 
     jsonResponse = json.dumps(objectResponse.__dict__, ensure_ascii=False).encode('utf8')
 
