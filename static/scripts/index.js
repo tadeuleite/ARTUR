@@ -10,7 +10,7 @@ const BOT_NAME = "A.R.T.U.R.";
 const PERSON_NAME = "Você";
 
 document.querySelector(".openChatBtn").addEventListener("click", openForm);
-document.querySelector(".close").addEventListener("click", closeForm);
+
 
 msgerForm.addEventListener("submit", event => {
     event.preventDefault();
