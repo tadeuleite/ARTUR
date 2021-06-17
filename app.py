@@ -28,10 +28,10 @@ def get_bot_response():
     formatedResponse = ftfy.fix_text(response.text)
     objectResponse = BotResponse(response.confidence, formatedResponse, response.in_response_to, response.conversation, response.tags)
     if objectResponse.confidence < 0.8:
-        iaResult = appBusiness.test(userText)      
+        iaResult = appBusiness.processAI(userText)
         if iaResult.__len__() > 0:
             objectResponse = BotResponse(100, iaResult[0].response, '', '', '')
-        else:     
+        else:
             n = random.randint(0, (defaultResposes.__len__() - 1))
             objectResponse.text = defaultResposes[n]
 

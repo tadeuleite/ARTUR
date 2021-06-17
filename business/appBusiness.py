@@ -1,34 +1,35 @@
-# pega input
-# stopword
-# vê quantas palavras principais tem na response
-# retorna response
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+from service.appService import appService
+
 class ResponseIa:
     def __init__(self, response, countPrincipalWords):
         self.response = response
         self.countPrincipalWords = countPrincipalWords
-class appBusiness(object):
-    
-  
-    def test(input):
+
+class appBusiness(object): 
+
+    def processAI(input):
         Stopwords = set(stopwords.words('portuguese'))
-                
+        
         palavras = word_tokenize(input)
-        responses = [
-        'a segunda via do boleto pode ser encontrada aqui', 
-        'a segunda via da nota fiscal está aqui', 
-        'a segunda cadeira está impressa na via', 
-        'a segunda via da matricula pode ser encontrada via web']
+        responses = appService.get_responses()
+
+        palavrasSemStopWord = []
+        for palavra in palavras:
+            if palavra not in Stopwords:
+                palavrasSemStopWord.append(palavra)
 
         respostaMaisAcertiva = []
 
         for response in responses:
             countPrincipalWords = 0
-            for palavra in palavras:
-                if palavra in response and palavra not in Stopwords:
+            for palavra in palavrasSemStopWord:
+                if palavra.lower() in response[0].lower():
                     countPrincipalWords = countPrincipalWords + 1
-            if countPrincipalWords >= 3:
+            if countPrincipalWords >= (palavrasSemStopWord.__len__() / 2):
                 respostaMaisAcertiva.append(ResponseIa(response, countPrincipalWords))
             
+        respostaMaisAcertiva.sort(reverse=True, key=lambda respostaMaisAcertiva: respostaMaisAcertiva.countPrincipalWords)
         return respostaMaisAcertiva
+        
